@@ -4,149 +4,163 @@
 <meta charset="utf-8" />
 <style>
   :root{
-    --ink:#12141a; --ink2:#4a5162; --ink3:#7b8496;
-    --line:#e3e7ef; --card:#ffffff; --bg:#f4f6fa;
-    --blue:#2f6bff; --blue-soft:#eaf0ff;
-    --gray:#8b93a4; --gray-soft:#f1f3f7;
+    --ink:#101319; --ink2:#4b5263; --ink3:#838b9c;
+    --line:#e2e6ef; --bg:#f5f7fb; --card:#fff;
+    --blue:#2f6bff; --violet:#7c5cff; --orange:#ff8a3d; --green:#19a974; --red:#e5484d;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
-    width:1600px; min-height:860px; padding:56px 64px 44px;
-    background:var(--bg); color:var(--ink);
-    font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+    width:1600px; padding:44px 56px 32px;
+    background:
+      radial-gradient(1100px 420px at 12% -8%, #e8eeff 0%, rgba(232,238,255,0) 70%),
+      radial-gradient(900px 380px at 96% 4%, #fdeee6 0%, rgba(253,238,230,0) 70%),
+      var(--bg);
+    color:var(--ink); font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
     display:flex; flex-direction:column;
   }
-  header{display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:26px; border-bottom:2px solid var(--line)}
-  h1{font-size:40px; letter-spacing:.5px; line-height:1.15}
+  header{display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:20px; border-bottom:2px solid var(--line)}
+  h1{font-size:38px; line-height:1.15; letter-spacing:.5px}
   h1 span{color:var(--blue)}
-  .sub{font-size:17px; color:var(--ink2); margin-top:10px}
-  .meta{font-size:14px; color:var(--ink3); text-align:right; line-height:1.7}
-  .row{display:flex; gap:24px; margin-top:34px; flex:0 0 auto; align-items:stretch}
-  .card{
-    flex:1 1 0; background:var(--card); border:1.5px solid var(--line); border-radius:18px;
-    padding:26px 26px 24px; display:flex; flex-direction:column; position:relative;
-  }
-  .card.now{border-color:var(--blue); box-shadow:0 10px 30px rgba(47,107,255,.10)}
-  .tag{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700; letter-spacing:.4px}
-  .num{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;color:#fff;background:var(--gray)}
-  .card.now .num{background:var(--blue)}
-  .tag.past{color:var(--gray)}
-  .tag.cur{color:var(--blue)}
-  h2{font-size:24px; margin-top:14px; line-height:1.3}
-  .kicker{font-size:14px; color:var(--ink3); margin-top:6px}
-  ul{list-style:none; margin-top:18px; display:flex; flex-direction:column; gap:11px}
-  li{font-size:15.5px; line-height:1.55; color:var(--ink2); display:flex; gap:9px}
-  li::before{content:""; width:6px;height:6px;border-radius:50%;background:var(--line);margin-top:9px;flex:none}
-  .card.now li::before{background:var(--blue)}
-  li b{color:var(--ink)}
-  .verdict{
-    margin-top:auto; padding:12px 14px; border-radius:12px; font-size:14.5px; line-height:1.5;
-    background:var(--gray-soft); color:var(--ink2);
-  }
-  .card.now .verdict{background:var(--blue-soft); color:#1b3ea8}
-  .verdict b{color:inherit}
-  .team{
-    margin-top:22px; background:var(--card); border:1.5px solid var(--line); border-radius:16px;
-    padding:20px 26px; display:flex; align-items:center; gap:18px;
-  }
-  .team .label{font-size:13px; letter-spacing:2px; color:var(--ink3); flex:none}
-  .who{
-    display:flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px;
-    background:var(--gray-soft); font-size:15px; color:var(--ink); white-space:nowrap;
-  }
-  .who.main{background:#131722; color:#fff}
-  .who.chief{background:var(--blue-soft); color:#1b3ea8; font-weight:600}
-  .grp{display:flex; gap:10px; flex-wrap:wrap}
-  .who.bot{background:#fff; border:1.5px solid var(--line); font-size:14.5px}
-  .sep{color:var(--ink3); font-size:18px; flex:none}
-  .note{margin-left:auto; font-size:13.5px; color:var(--ink3); text-align:right; line-height:1.5; flex:none}
-  .effects{display:flex; gap:24px; margin-top:20px}
-  .eff{flex:1 1 0; display:flex; gap:12px; align-items:flex-start; padding:2px 2px}
-  .eff .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);margin-top:8px;flex:none}
-  .eff .t{font-size:15px; line-height:1.5; color:var(--ink2)}
-  .eff .t b{color:var(--ink); display:block; font-size:15.5px; margin-bottom:2px}
+  .sub{font-size:16px; color:var(--ink2); margin-top:9px}
+  .meta{font-size:13.5px; color:var(--ink3); text-align:right; line-height:1.7}
+
+  .stage{display:grid; grid-template-columns:1fr 430px; gap:22px; margin-top:22px}
+
+  .panel{background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:20px 24px 18px;}
+  .panel + .panel{margin-top:16px}
+  .panel.now{border-color:#c9d6ff; box-shadow:0 12px 34px rgba(47,107,255,.10)}
+  .phead{display:flex; align-items:center; gap:10px; margin-bottom:4px}
+  .pill{font-size:12.5px; font-weight:700; letter-spacing:.6px; padding:4px 10px; border-radius:999px}
+  .pill.past{background:#eef0f5; color:#6b7382}
+  .pill.now{background:#e7eeff; color:#1b3ea8}
+  .ptitle{font-size:18px; font-weight:700}
+  .pdesc{font-size:13.5px; color:var(--ink3); margin:2px 0 14px}
+
+  .flow{display:flex; align-items:center; gap:6px}
+  .node{display:flex; flex-direction:column; align-items:center; gap:6px; flex:none}
+  .node .cap{font-size:12.5px; color:var(--ink3); white-space:nowrap}
+  .node .cap b{color:var(--ink); font-weight:600}
+  .bot{width:60px; height:60px; color:var(--ink3)}
+  .bot.sm{width:50px;height:50px}
+  .bot.blue{color:var(--blue)} .bot.violet{color:var(--violet)} .bot.orange{color:var(--orange)} .bot.green{color:var(--green)} .bot.gray{color:#9aa3b4}
+  .human{width:52px;height:52px;color:var(--ink2)}
+  .arrowrow{flex:1 1 auto; display:flex; align-items:center; justify-content:center; min-width:34px}
+  .arrowrow svg{width:100%; height:26px; color:#c3cad8}
+  .fan{display:flex; gap:18px; margin-left:2px}
+  .badge{margin-left:auto; align-self:flex-start; display:flex; align-items:center; gap:7px; font-size:13px; font-weight:600; padding:8px 12px; border-radius:12px; white-space:nowrap}
+  .badge.bad{background:#fdecec; color:#b0282c}
+  .badge.good{background:#e7f7f0; color:#0d7a52}
+  .badge svg{width:15px;height:15px}
+
+  .side{display:flex; flex-direction:column; gap:12px}
+  .scard{background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:15px 18px; display:flex; gap:13px; align-items:center; flex:1 1 0}
+  .scard .ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none}
+  .ico.blue{background:#e7eeff;color:var(--blue)} .ico.violet{background:#efeaff;color:var(--violet)}
+  .ico.green{background:#e6f7f0;color:var(--green)} .ico.orange{background:#fff0e6;color:var(--orange)}
+  .ico svg{width:20px;height:20px}
+  .scard .t{font-size:15px; font-weight:700; line-height:1.35}
+  .scard .d{font-size:13px; color:var(--ink3); line-height:1.5; margin-top:3px}
+
+  .lane{background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:18px 24px 20px; margin-top:16px}
+  .lane .lhead{display:flex; align-items:center; gap:10px; margin-bottom:14px}
+  .lane .ltitle{font-size:16px; font-weight:700}
+  .lane .lnote{font-size:12.5px; color:var(--ink3); margin-left:auto}
+  .steps{display:flex; align-items:center; gap:4px}
+  .step{flex:1 1 0; display:flex; align-items:center; gap:11px; padding:8px 10px; border-radius:12px; background:#fafbfe}
+  .step .sn{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;flex:none;font-size:14px;font-weight:700}
+  .sn.b{background:#e7eeff;color:var(--blue)} .sn.v{background:#efeaff;color:var(--violet)}
+  .sn.o{background:#fff0e6;color:var(--orange)} .sn.g{background:#e6f7f0;color:var(--green)}
+  .sn.k{background:#eef0f5;color:#5f6776}
+  .step .st{font-size:13.5px; font-weight:700; line-height:1.3; white-space:nowrap}
+  .step .sd{font-size:12px; color:var(--ink3); line-height:1.35; margin-top:2px}
+  .ga{flex:none; width:20px; color:#c9d0de}
+  .ga svg{width:20px;height:14px}
+
   .bottom{
-    margin-top:26px; background:#131722; color:#eef1f7; border-radius:16px;
-    padding:22px 28px; display:flex; align-items:center; gap:22px;
+    margin-top:20px; background:#11151f; color:#eef1f7; border-radius:16px;
+    padding:18px 26px; display:flex; align-items:center; gap:16px;
   }
-  .bottom .label{font-size:13px; letter-spacing:2px; color:#93a0bb; flex:none}
-  .bottom .line{font-size:21px; line-height:1.5; font-weight:600}
+  .bottom .label{font-size:12.5px; letter-spacing:2px; color:#8e9bb6; flex:none}
+  .bottom .line{font-size:20px; font-weight:600; line-height:1.45}
   .bottom .line em{font-style:normal; color:#8fb2ff}
-  .arrow{align-self:center; color:var(--ink3); font-size:22px; flex:none}
+  .foot{font-size:12px; color:var(--ink3); margin-top:12px; text-align:right}
 </style>
 </head>
 <body>
   <header>
     <div>
       <h1>为什么我用 <span>Bot 团队</span></h1>
-      <div class="sub">从"一个模型派生多个子任务"到"多个 Bot 各用各的模型"</div>
+      <div class="sub">同一个问题，交给不同模型的 Bot 去分工 —— 而不是一个模型分身干所有活</div>
     </div>
     <div class="meta">AI Agent 进展汇报<br/>2026-11-20</div>
   </header>
 
-  <div class="row">
-    <div class="card">
-      <div class="tag past"><span class="num">1</span>过去 · DSH Agent Team</div>
-      <h2>一个模型，派生多个子 Agent</h2>
-      <div class="kicker">分工靠 prompt，不靠模型</div>
-      <ul>
-        <li>主 Agent 派生子任务，<b>继承同一个模型</b></li>
-        <li>调研、实现、评审都出自同一套判断</li>
-        <li>模型换不了，任务拆得再细也是同源</li>
-      </ul>
-      <div class="verdict">问题：<b>球员和裁判是同一个人</b>，评审容易自证，盲区照旧。</div>
+  <div class="stage">
+    <div>
+      <!-- 过去 -->
+      <div class="panel">
+        <div class="phead"><span class="pill past">过去</span><span class="ptitle">DSH Agent Team</span></div>
+        <div class="pdesc">一个模型派生出多个子 Agent —— 分工靠提示词，模型始终是同一个</div>
+        <div class="flow">
+          <div class="node"><svg class="human" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="21" r="10" fill="currentColor" opacity=".35"/><circle cx="32" cy="21" r="10" stroke="currentColor" stroke-width="2.5"/><path d="M13 56c0-10.5 8.5-19 19-19s19 8.5 19 19" stroke="currentColor" stroke-width="2.5" fill="currentColor" opacity=".9"/></svg><div class="cap"><b>我</b></div></div>
+          <div class="arrowrow"><svg viewBox="0 0 100 26" fill="none"><path d="M2 13h88" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M84 6l10 7-10 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="node"><svg class="bot gray" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".12"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/><rect x="20" y="51" width="24" height="6" rx="3" fill="currentColor" opacity=".45"/></svg><div class="cap"><b>一个模型</b></div></div>
+          <div class="arrowrow"><svg viewBox="0 0 100 26" fill="none"><path d="M2 13h88" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M84 6l10 7-10 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="fan">
+            <div class="node"><svg class="bot gray sm" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".12"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/></svg><div class="cap">调研</div></div>
+            <div class="node"><svg class="bot gray sm" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".12"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/></svg><div class="cap">实现</div></div>
+            <div class="node"><svg class="bot gray sm" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".12"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/></svg><div class="cap">评审</div></div>
+          </div>
+          <div class="badge bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l9 16H3L12 3z"/><path d="M12 9v5M12 17h.01"/></svg>球员兼裁判</div>
+        </div>
+      </div>
+
+      <!-- 现在 -->
+      <div class="panel now">
+        <div class="phead"><span class="pill now">现在</span><span class="ptitle">DS Bot 团队</span></div>
+        <div class="pdesc">每个 Bot 一个模型、一份记忆；主 Bot 只调度和裁决，不亲自下场</div>
+        <div class="flow">
+          <div class="node"><svg class="human" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="21" r="10" fill="currentColor" opacity=".35"/><circle cx="32" cy="21" r="10" stroke="currentColor" stroke-width="2.5"/><path d="M13 56c0-10.5 8.5-19 19-19s19 8.5 19 19" stroke="currentColor" stroke-width="2.5" fill="currentColor" opacity=".9"/></svg><div class="cap"><b>我</b></div></div>
+          <div class="arrowrow"><svg viewBox="0 0 100 26" fill="none"><path d="M2 13h88" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M84 6l10 7-10 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="node"><svg class="bot blue" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".14"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/><rect x="20" y="51" width="24" height="6" rx="3" fill="currentColor" opacity=".45"/></svg><div class="cap"><b>Chief</b> · 调度</div></div>
+          <div class="arrowrow"><svg viewBox="0 0 100 26" fill="none"><path d="M2 13h88" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M84 6l10 7-10 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="fan">
+            <div class="node"><svg class="bot violet sm" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".14"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/></svg><div class="cap">研究</div></div>
+            <div class="node"><svg class="bot orange sm" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".14"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/></svg><div class="cap">实现</div></div>
+            <div class="node"><svg class="bot green sm" viewBox="0 0 64 64"><circle cx="32" cy="6" r="3.5" fill="currentColor"/><path d="M32 9v6" stroke="currentColor" stroke-width="3"/><rect x="9" y="15" width="46" height="33" rx="12" fill="currentColor" opacity=".14"/><rect x="9" y="15" width="46" height="33" rx="12" stroke="currentColor" stroke-width="2.5" fill="none"/><circle cx="24" cy="30" r="4.2" fill="currentColor"/><circle cx="40" cy="30" r="4.2" fill="currentColor"/><rect x="26" y="39" width="12" height="3.4" rx="1.7" fill="currentColor"/></svg><div class="cap">评审</div></div>
+          </div>
+          <div class="badge good"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>异源评审</div>
+        </div>
+      </div>
     </div>
 
-    <div class="card now">
-      <div class="tag cur"><span class="num">2</span>现在 · DS Bot</div>
-      <h2>每个 Bot 一个模型、一份记忆</h2>
-      <div class="kicker">分工靠"谁是谁"，不靠提示词</div>
-      <ul>
-        <li>Bot 之间<b>模型可以不同</b>，也能各自绑定工作目录</li>
-        <li>主 Bot 只管调度与裁决，<b>不亲自下场</b></li>
-        <li>调研 / 实现 / 评审用不同模型，交叉验证</li>
-        <li>谁做的、谁审的，记录里看得清清楚楚</li>
-      </ul>
-      <div class="verdict">结果：<b>判断和执行被拆开</b>，异源评审才有意义。</div>
-    </div>
-
-    <div class="card">
-      <div class="tag past"><span class="num">3</span>趋势 · Bot 化</div>
-      <h2>Agent 正在变成"在岗的同事"</h2>
-      <div class="kicker">从一次性对话，到长期角色</div>
-      <ul>
-        <li>行业里 Bot 化的方向已经很明确</li>
-        <li>每个 Bot 有名字、职责、长期记忆</li>
-        <li>人负责目标，Bot 团队负责推进</li>
-      </ul>
-      <div class="verdict">这也是我换到这套东西的<b>外部理由</b>：方向对，不是玩具。</div>
+    <div class="side">
+      <div class="scard"><div class="ico blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div><div><div class="t">不同模型，才叫分工</div><div class="d">一个模型换个提示词，只是换了角色台词，判断还是同一套。</div></div></div>
+      <div class="scard"><div class="ico violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v15H6.5A2.5 2.5 0 004 20.5V5.5z"/><path d="M8 8h7M8 12h5"/></svg></div><div><div class="t">每个 Bot 有自己的记忆</div><div class="d">上下文不互相污染，长任务可以一直带着走。</div></div></div>
+      <div class="scard"><div class="ico green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M2.5 12S6 6.5 12 6.5 21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12z"/></svg></div><div><div class="t">谁做的、谁审的，记得清</div><div class="d">评审不是过流程，是另一套判断在检查。</div></div></div>
+      <div class="scard"><div class="ico orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l5-5 3 3 4-6 6 4"/><path d="M3 21h18"/></svg></div><div><div class="t">也踩在趋势上</div><div class="d">Bot 化是被验证过的方向：Agent 从一次性对话变成长期在岗的同事。</div></div></div>
     </div>
   </div>
 
-  <div class="team">
-    <div class="label">团队</div>
-    <div class="who main">我 · 定目标 / 拍板</div>
-    <div class="sep">→</div>
-    <div class="who chief">Chief Bot · 调度 / 裁决</div>
-    <div class="sep">→</div>
-    <div class="grp">
-      <div class="who bot">研究</div>
-      <div class="who bot">实现</div>
-      <div class="who bot">评审</div>
-      <div class="who bot">运维</div>
+  <div class="lane">
+    <div class="lhead"><div class="ltitle">一条需求怎么走</div><div class="lnote">每一步都由不同的 Bot 接手，上下文各自带着</div></div>
+    <div class="steps">
+      <div class="step"><div class="sn k">1</div><div><div class="st">我提需求</div><div class="sd">说清楚要什么</div></div></div>
+      <div class="ga"><svg viewBox="0 0 20 14" fill="none"><path d="M1 7h16M12 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step"><div class="sn b">2</div><div><div class="st">Chief 拆任务</div><div class="sd">分工、定验收</div></div></div>
+      <div class="ga"><svg viewBox="0 0 20 14" fill="none"><path d="M1 7h16M12 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step"><div class="sn v">3</div><div><div class="st">不同模型并行</div><div class="sd">研究 / 实现各干各的</div></div></div>
+      <div class="ga"><svg viewBox="0 0 20 14" fill="none"><path d="M1 7h16M12 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step"><div class="sn g">4</div><div><div class="st">异源评审</div><div class="sd">换个模型挑错</div></div></div>
+      <div class="ga"><svg viewBox="0 0 20 14" fill="none"><path d="M1 7h16M12 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step"><div class="sn o">5</div><div><div class="st">我拍板</div><div class="sd">看结果，不看过程</div></div></div>
     </div>
-    <div class="note">每个 Bot 独立模型、独立记忆<br/>谁做的、谁审的，一眼分清</div>
-  </div>
-
-  <div class="effects">
-    <div class="eff"><div class="dot"></div><div class="t"><b>同一个问题，出两版再选</b>研究 Bot 和评审 Bot 用不同模型，结论不一致的地方就是风险点。</div></div>
-    <div class="eff"><div class="dot"></div><div class="t"><b>评审不共用实现方的模型</b>盲区不重叠，评审才不是走流程。</div></div>
-    <div class="eff"><div class="dot"></div><div class="t"><b>长任务各管一段</b>记忆、工作目录分开，不会互相污染上下文。</div></div>
   </div>
 
   <div class="bottom">
     <div class="label">一句话</div>
     <div class="line">把<em>判断</em>和<em>执行</em>交给不同模型，是这套东西能真正上生产的原因。</div>
   </div>
+  <div class="foot">示意图 · 实际使用截图见后页</div>
 </body>
 </html>
