@@ -3,135 +3,136 @@
 <head>
 <meta charset="utf-8" />
 <style>
-  :root{
-    --ink:#101319; --ink2:#4b5263; --ink3:#838b9c;
-    --line:#e2e6ef; --card:#fff;
-    --blue:#2f6bff; --violet:#7c5cff; --orange:#ff8a3d; --green:#19a974; --red:#e5484d;
-  }
+  :root{--ink:#101319;--ink2:#4b5263;--ink3:#8b93a4;--line:#e2e6ef;--card:#fff;--blue:#2f6bff;--violet:#7c5cff;--orange:#ff8a3d;--green:#19a974}
   *{box-sizing:border-box;margin:0;padding:0}
   body{
-    width:1600px; padding:44px 56px 32px;
+    width:1600px; padding:44px 56px 28px;
     background:
-      radial-gradient(1000px 380px at 8% -10%, #e9efff 0%, rgba(233,239,255,0) 70%),
-      radial-gradient(900px 360px at 98% 0%, #fdeee6 0%, rgba(253,238,230,0) 70%),
+      radial-gradient(1100px 420px at 8% -8%, #e8eeff 0%, rgba(232,238,255,0) 70%),
+      radial-gradient(900px 380px at 98% 2%, #fdeee6 0%, rgba(253,238,230,0) 70%),
       #f5f7fb;
     color:var(--ink); font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
   }
-  header{display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:20px; border-bottom:2px solid var(--line)}
-  h1{font-size:38px; line-height:1.15; letter-spacing:.5px}
-  h1 span{color:var(--blue)}
-  .sub{font-size:16px; color:var(--ink2); margin-top:9px}
+  header{display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid var(--line)}
+  h1{font-size:40px; line-height:1.1; letter-spacing:.5px}
+  h1 span{color:var(--violet)}
+  .sub{font-size:17px; color:var(--ink2); margin-top:8px}
   .meta{font-size:13.5px; color:var(--ink3); text-align:right; line-height:1.7}
 
-  .metrics{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:22px}
-  .m{background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:16px 18px 15px; position:relative; overflow:hidden}
-  .m::after{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--c)}
-  .m .big{font-size:44px; font-weight:800; letter-spacing:-1px; color:var(--c); line-height:1.05}
-  .m .big small{font-size:20px; font-weight:700; margin-left:2px}
-  .m .lbl{font-size:14.5px; font-weight:700; margin-top:8px; line-height:1.4}
-  .m .cap{font-size:12.5px; color:var(--ink3); margin-top:6px; line-height:1.45}
-  .m .src{font-size:11px; color:#a9b1c1; margin-top:8px}
+  .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:22px}
+  .card{background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:18px 18px 15px; position:relative; overflow:hidden}
+  .card::after{content:""; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--c)}
+  .card .n{font-size:44px; font-weight:800; letter-spacing:-1px; line-height:1; color:var(--c)}
+  .card .n i{font-style:normal; font-size:22px; font-weight:800; margin-left:2px}
+  .card .l{font-size:15.5px; font-weight:800; margin-top:12px; line-height:1.35}
+  .card .s{font-size:12px; color:var(--ink3); margin-top:7px}
 
-  .mid{display:grid; grid-template-columns:1.05fr 1fr; gap:16px; margin-top:16px}
-  .box{background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:16px 20px 14px; display:flex; flex-direction:column}
-  .bt{display:flex; align-items:baseline; gap:10px}
-  .bt .t{font-size:15.5px; font-weight:700}
-  .bt .n{font-size:12.5px; color:var(--ink3); margin-left:auto}
+  .main{display:grid; grid-template-columns:1.15fr 1fr; gap:18px; margin-top:18px}
+  .panel{background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:18px 22px}
+  .pt{font-size:15px; font-weight:800; display:flex; align-items:center; gap:9px}
+  .pt .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+  .pt .u{margin-left:auto; font-size:11.5px; color:var(--ink3); font-weight:600}
 
-  .chart{display:flex; align-items:flex-end; gap:26px; height:238px; margin-top:16px; padding-left:6px}
-  .bar{flex:1 1 0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%}
-  .bar .v{font-size:15px; font-weight:800; color:var(--ink); margin-bottom:6px}
-  .bar .b{width:100%; border-radius:10px 10px 4px 4px; background:linear-gradient(180deg,#8fb2ff,#2f6bff)}
-  .bar.b2 .b{background:linear-gradient(180deg,#a99bff,#7c5cff)}
-  .bar.b3 .b{background:linear-gradient(180deg,#ffc29c,#ff8a3d)}
-  .bar .y{font-size:12.5px; color:var(--ink3); margin-top:7px}
-  .axis{font-size:12px; color:var(--ink3); margin-top:10px; padding-top:8px; border-top:1px dashed var(--line)}
+  .chart{display:flex; align-items:flex-end; gap:34px; height:250px; padding:16px 8px 0; border-bottom:2px solid #eef1f7}
+  .bar{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:9px}
+  .bar .num{font-size:19px; font-weight:800; color:var(--ink)}
+  .bar .num span{font-size:12px; color:var(--ink3); font-weight:800; margin-left:2px}
+  .bar .col{width:100%; border-radius:10px 10px 0 0; background:linear-gradient(180deg,var(--c1),var(--c2))}
+  .bar .yr{font-size:13px; color:var(--ink2); font-weight:700; margin-bottom:-30px; padding-top:9px}
+  .axis{display:flex; margin-top:34px; font-size:11.5px; color:var(--ink3)}
 
-  .terms{display:flex; flex-direction:column; gap:9px; margin-top:14px}
-  .note{margin-top:auto; padding-top:12px; border-top:1px dashed var(--line); font-size:12.5px; color:var(--ink3); line-height:1.6}
-  .term{display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:11px; background:#fafbfe; border:1px solid var(--line)}
-  .term .k{font-size:13px; font-weight:800; padding:3px 9px; border-radius:8px; background:#e7eeff; color:#1b3ea8; flex:none}
-  .term .k.v{background:#efeaff; color:#5b3ad6}
-  .term .k.o{background:#fff0e6; color:#c25720}
-  .term .k.g{background:#e6f7f0; color:#0d7a52}
-  .term .d{font-size:13px; color:var(--ink2); line-height:1.45}
-  .term .d b{color:var(--ink)}
+  .flow{display:flex; flex-direction:column; gap:0; padding-top:6px}
+  .fstep{display:flex; align-items:center; gap:14px; padding:9px 0}
+  .ficon{width:54px;height:54px;border-radius:16px; display:grid; place-items:center; flex:none; background:color-mix(in srgb, var(--c) 12%, #fff); color:var(--c); border:1.5px solid color-mix(in srgb, var(--c) 28%, #fff)}
+  .ficon svg{width:28px;height:28px}
+  .fstep .ft{font-size:17px; font-weight:800}
+  .fstep .fs{font-size:12.5px; color:var(--ink3); margin-top:3px}
+  .farrow{display:flex; align-items:center; gap:10px; padding-left:24px; color:#c3cbd9; height:16px}
+  .farrow svg{width:16px;height:16px}
+  .farrow span{font-size:11px; color:#aab3c1}
 
-  .bottom{margin-top:20px; background:#11151f; color:#eef1f7; border-radius:16px; padding:18px 26px; display:flex; align-items:center; gap:16px}
-  .bottom .label{font-size:12.5px; letter-spacing:2px; color:#8e9bb6; flex:none}
-  .bottom .line{font-size:20px; font-weight:600; line-height:1.45}
-  .bottom .line em{font-style:normal; color:#8fb2ff}
-
-  .srcs{margin-top:12px; font-size:12px; color:#9aa3b4; line-height:1.7; text-align:right}
-  .srcs b{color:#7b8496; font-weight:600}
+  .bottom{margin-top:18px; background:#11151f; color:#eef1f7; border-radius:18px; padding:19px 28px; display:flex; align-items:center; gap:18px}
+  .bottom .k{font-size:13px; letter-spacing:3px; color:#8e9bb6; flex:none}
+  .bottom .q{font-size:22px; font-weight:700; line-height:1.35}
+  .bottom .q em{font-style:normal; color:#b9a7ff}
+  .bottom .q i{font-style:normal; color:#9fe6c4}
+  .srcs{margin-top:10px; font-size:11px; color:#a9b1c1; text-align:right}
 </style>
 </head>
 <body>
   <header>
     <div>
-      <h1>Agent 现在到底有多热？</h1>
-      <div class="sub">四个公开数据源：行业最热的词是 Agent，落到我们手上就是 Bot</div>
+      <h1>Agent 到底有多热</h1>
+      <div class="sub">四份报告的数字</div>
     </div>
-    <div class="meta">AI Agent 进展汇报 · 2 / 2<br/>2026-11-20</div>
+    <div class="meta">AI Agent 进展汇报 · 4 / 4<br/>2026-11-20</div>
   </header>
 
-  <div class="metrics">
-    <div class="m" style="--c:var(--blue)">
-      <div class="big">40<small>%</small></div>
-      <div class="lbl">2026 年企业应用会内置任务型 Agent</div>
-      <div class="cap">2025 年这个数字还不到 5%</div>
-      <div class="src">Gartner，2025-08 预测</div>
+  <div class="cards">
+    <div class="card" style="--c:#2f6bff">
+      <div class="n">40<i>%</i></div>
+      <div class="l">企业应用内置任务型 Agent</div>
+      <div class="s">2026 年 · 2025 年不到 5%｜Gartner</div>
     </div>
-    <div class="m" style="--c:var(--violet)">
-      <div class="big">62<small>%</small></div>
-      <div class="lbl">企业至少已在试用 AI Agent</div>
-      <div class="cap">但近三分之二还没在全公司铺开</div>
-      <div class="src">McKinsey《State of AI 2025》</div>
+    <div class="card" style="--c:#7c5cff">
+      <div class="n">62<i>%</i></div>
+      <div class="l">机构已在试用 AI Agent</div>
+      <div class="s">2025 年调研 · 近 2000 家｜McKinsey</div>
     </div>
-    <div class="m" style="--c:var(--orange)">
-      <div class="big">45.5<small>%</small></div>
-      <div class="lbl">Agent 市场 2026 年增速</div>
-      <div class="cap">$8.29B → $12.06B，2030 年预计 $53.2B</div>
-      <div class="src">The Business Research Company，2026-02</div>
+    <div class="card" style="--c:#ff8a3d">
+      <div class="n">45.5<i>%</i></div>
+      <div class="l">Agent 市场年增速</div>
+      <div class="s">2026 年 120.6 亿美元｜TBRC</div>
     </div>
-    <div class="m" style="--c:var(--green)">
-      <div class="big">53<small>%</small></div>
-      <div class="lbl">亚太企业已用 Agent 跑完整流程</div>
-      <div class="cap">全球平均 46%，亚太走在最前面</div>
-      <div class="src">Microsoft 2025 Work Trend Index</div>
+    <div class="card" style="--c:#19a974">
+      <div class="n">53<i>%</i></div>
+      <div class="l">亚太企业已用 Agent 跑流程</div>
+      <div class="s">全球 46%｜Microsoft</div>
     </div>
   </div>
 
-  <div class="mid">
-    <div class="box">
-      <div class="bt"><div class="t">AI Agent 市场规模</div><div class="n">十亿美元</div></div>
+  <div class="main">
+    <div class="panel">
+      <div class="pt"><span class="dot"></span>Agent 市场规模<span class="u">十亿美元</span></div>
       <div class="chart">
-        <div class="bar b1"><div class="v">8.29</div><div class="b" style="height:30px"></div><div class="y">2025</div></div>
-        <div class="bar b2"><div class="v">12.06</div><div class="b" style="height:44px"></div><div class="y">2026</div></div>
-        <div class="bar b3"><div class="v">53.2</div><div class="b" style="height:192px"></div><div class="y">2030</div></div>
+        <div class="bar" style="--c1:#a9c2ff;--c2:#7ea4ff"><div class="num">8.29</div><div class="col" style="height:44px"></div></div>
+        <div class="bar" style="--c1:#8fb2ff;--c2:#2f6bff"><div class="num">12.06</div><div class="col" style="height:64px"></div></div>
+        <div class="bar" style="--c1:#6f9bff;--c2:#1f4bd8"><div class="num">53.2<span style="margin-left:9px">×4.4</span></div><div class="col" style="height:196px"></div></div>
       </div>
-      <div class="axis">五年 6.4 倍；复合增速 44.9%，不是一条缓慢上升的曲线，是一段陡坡。</div>
+      <div class="axis"><span>2025</span><span style="margin-left:auto">2026</span><span style="margin-left:auto;padding-right:26px">2030</span></div>
     </div>
 
-    <div class="box">
-      <div class="bt"><div class="t">这几个词在说什么</div><div class="n">一条演进线</div></div>
-      <div class="terms">
-        <div class="term"><div class="k">Chatbot</div><div class="d"><b>问答形态</b>：你问，它答，不主动办事</div></div>
-        <div class="term"><div class="k v">Copilot</div><div class="d"><b>助手形态</b>：贴在你的工具里，帮你写、帮你改</div></div>
-        <div class="term"><div class="k o">Agent</div><div class="d"><b>执行形态</b>：自己拆任务、调工具、跑完整条流程 —— 行业热的就是它</div></div>
-        <div class="term"><div class="k g">Bot 团队</div><div class="d"><b>组织形态</b>：多个 Agent 各有角色模型，像同事一样分工 —— 我们看到、能用的就是它</div></div>
+    <div class="panel">
+      <div class="pt"><span class="dot" style="background:var(--violet)"></span>这几个词在说什么</div>
+      <div class="flow">
+        <div class="fstep" style="--c:#8d96a8">
+          <div class="ficon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M10 12h28v18H22l-8 7v-7h-4z" stroke-linejoin="round"/></svg></div>
+          <div><div class="ft">聊天</div><div class="fs">它回你一句</div></div>
+        </div>
+        <div class="farrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>长出工具</span></div>
+        <div class="fstep" style="--c:#2f6bff">
+          <div class="ficon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="8" y="10" width="32" height="22" rx="4"/><path d="M18 38h12M24 32v6"/></svg></div>
+          <div><div class="ft">助手</div><div class="fs">它替你做一步</div></div>
+        </div>
+        <div class="farrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>交得出活</span></div>
+        <div class="fstep" style="--c:#7c5cff">
+          <div class="ficon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="24" cy="24" r="7"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></svg></div>
+          <div><div class="ft">代理</div><div class="fs">它自己拆、自己跑</div></div>
+        </div>
+        <div class="farrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>要人盯、要分工</span></div>
+        <div class="fstep" style="--c:#19a974">
+          <div class="ficon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="17" cy="16" r="6"/><circle cx="34" cy="29" r="4.5"/><path d="M5 38c0-6 5.4-10 12-10s12 4 12 10"/><path d="M30 40c.6-4.4 4-7 8-7"/></svg></div>
+          <div><div class="ft">团队</div><div class="fs">多模型分工、互相验收</div></div>
+        </div>
       </div>
-      <div class="note">行业报告统一叫 <b>Agent / Agentic AI</b>；<b>Bot</b> 是它在产品里的日常名字。同一件事，两种说法。</div>
     </div>
   </div>
 
   <div class="bottom">
-    <div class="label">结论</div>
-    <div class="line">最热的词是 <em>Agent</em>，最能落地的形态是 <em>Bot</em>；真正稀缺的不是模型，是<em>怎么组织它们</em>。</div>
+    <div class="k">结论</div>
+    <div class="q">最热的词是 <em>Agent</em>，最能落地的形态是 <i>Bot</i>。</div>
   </div>
 
-  <div class="srcs">
-    <b>来源：</b>Gartner《40% of Enterprise Apps Will Feature Task-Specific AI Agents by 2026》(2025-08)；McKinsey《The State of AI in 2025: Agents, Innovation, and Transformation》(2025-11)；The Business Research Company《AI Agents Market Report 2026》(2026-02)；Microsoft《2025 Work Trend Index》(2025-04，样本 3.1 万人)。数字随各机构口径不同，仅用于趋势判断。
-  </div>
+  <div class="srcs">Gartner 2025-08-26 · McKinsey《The State of AI in 2025》 · The Business Research Company《AI Agents Market Report 2026》 · Microsoft 2025 Work Trend Index</div>
 </body>
 </html>
