@@ -4,173 +4,175 @@
 <meta charset="utf-8" />
 <style>
   :root{
-    --ink:#101319; --ink2:#4b5263; --ink3:#838b9c;
+    --ink:#101319; --ink2:#4b5263; --ink3:#8b93a4;
     --line:#e2e6ef; --card:#fff;
-    --blue:#2f6bff; --violet:#7c5cff; --orange:#ff8a3d; --green:#19a974; --red:#e5484d;
+    --blue:#2f6bff; --violet:#7c5cff; --orange:#ff8a3d; --green:#19a974;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
-    width:1600px; padding:44px 56px 32px;
+    width:1600px; padding:44px 56px 30px;
     background:
       radial-gradient(1100px 420px at 10% -8%, #e8eeff 0%, rgba(232,238,255,0) 70%),
       radial-gradient(900px 380px at 96% 4%, #fdeee6 0%, rgba(253,238,230,0) 70%),
       #f5f7fb;
     color:var(--ink); font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
   }
-  header{display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:20px; border-bottom:2px solid var(--line)}
-  h1{font-size:38px; line-height:1.15; letter-spacing:.5px}
-  h1 span{color:var(--blue)}
-  .sub{font-size:16px; color:var(--ink2); margin-top:9px}
+  header{display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid var(--line)}
+  h1{font-size:40px; line-height:1.1; letter-spacing:.5px}
+  h1 span{color:var(--orange)}
+  .sub{font-size:17px; color:var(--ink2); margin-top:8px}
   .meta{font-size:13.5px; color:var(--ink3); text-align:right; line-height:1.7}
 
-  .bar{display:flex; align-items:center; gap:12px; margin-top:18px; padding:0 2px}
-  .bar .lab{font-size:12.5px; font-weight:700; color:var(--ink3); letter-spacing:.5px}
-  .bar .ln{flex:1 1 auto; height:1px; background:var(--line)}
-  .bar .who{font-size:12.5px; color:var(--ink3)}
-  .bar .who b{color:var(--ink); font-weight:700}
+  /* 六步 */
+  .pipe{position:relative; display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-top:26px}
+  .pipe::before{content:""; position:absolute; left:6%; right:6%; top:46px; height:2px; background:repeating-linear-gradient(90deg,#d3dae8 0 8px,transparent 8px 16px)}
+  .step{position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:0}
+  .ring{width:92px;height:92px;border-radius:50%; display:grid; place-items:center; background:var(--card); border:2px solid var(--c); box-shadow:0 10px 24px rgba(16,19,25,.06); z-index:2}
+  .ring svg{width:42px;height:42px; color:var(--c)}
+  .step .no{position:absolute; top:-8px; left:50%; transform:translateX(24px); width:26px;height:26px;border-radius:50%; background:var(--c); color:#fff; font-size:13px; font-weight:800; display:grid; place-items:center; z-index:3}
+  .step .t{font-size:17px; font-weight:800; margin-top:14px}
+  .step .s{font-size:12.5px; color:var(--ink3); margin-top:5px}
+  .step .who{margin-top:9px; font-size:11.5px; font-weight:800; padding:4px 10px; border-radius:999px; background:color-mix(in srgb, var(--c) 12%, #fff); color:var(--c)}
 
-  .steps{display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:14px}
-  .st{position:relative; background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:14px 14px 13px; display:flex; flex-direction:column; min-height:196px}
-  .st::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; border-radius:16px 0 0 16px; background:var(--c)}
-  .st .no{font-size:11.5px; font-weight:800; color:var(--c); letter-spacing:1px}
-  .st .t{font-size:15px; font-weight:700; margin-top:5px; line-height:1.3}
-  .st .d{font-size:12.6px; color:var(--ink2); line-height:1.55; margin-top:7px}
-  .st .d b{color:var(--ink); font-weight:700}
-  .st .by{margin-top:auto; padding-top:9px; font-size:11.5px; color:var(--ink3); display:flex; align-items:center; gap:6px}
-  .st .by i{width:7px;height:7px;border-radius:50%;background:var(--c); flex:none}
-  .st .by b{color:var(--c); font-weight:700}
+  /* 前后 */
+  .pair{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:30px}
+  .pcard{background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:18px 22px 16px}
+  .pcard.now{border-color:#c9d6ff; box-shadow:0 14px 34px rgba(47,107,255,.10)}
+  .ph{display:flex; align-items:center; gap:10px; margin-bottom:6px}
+  .ph .pt{font-size:19px; font-weight:800}
+  .ph .badge{margin-left:auto; font-size:11.5px; font-weight:800; padding:5px 11px; border-radius:999px}
+  .badge.g{background:#eef0f5;color:#5f6776} .badge.b{background:#e7eeff;color:#1b3ea8}
+  .ph .big{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none}
+  .ph .big svg{width:22px;height:22px}
+  .big.g{background:#f0f1f5;color:#6b7382} .big.b{background:#e7eeff;color:var(--blue)}
+  .pline{font-size:13.5px; color:var(--ink3); margin-bottom:12px}
 
-  .lower{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px}
-  .mock{background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:13px 18px 14px}
-  .mock .mh{display:flex; align-items:baseline; gap:9px; margin-bottom:10px}
-  .mock .mt{font-size:15px; font-weight:700}
-  .mock .tag{font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:999px}
-  .tag.before{background:#eef0f5; color:#6b7382}
-  .tag.after{background:#e6f7f0; color:#0d7a52}
-  .mock .mn{font-size:12px; color:var(--ink3); margin-left:auto}
-
-  .panelrow{display:flex; gap:14px; align-items:stretch}
-  .sidebar{width:196px; border:1.5px solid var(--line); border-radius:14px; padding:10px 10px 9px; background:#fafbfe; display:flex; flex-direction:column; gap:6px; flex:none}
+  .mock{display:flex; gap:22px; align-items:center; justify-content:space-between}
+  .sidebar{width:226px; border:1.5px solid var(--line); border-radius:14px; padding:10px 10px 9px; background:#fafbfe; display:flex; flex-direction:column; gap:6px; flex:none}
   .sline{height:11px; border-radius:6px; background:#e9edf5}
-  .sline.w70{width:70%} .sline.w85{width:85%} .sline.w55{width:55%}
-  .sbot{height:34px; border-radius:10px; background:#eef2fa; display:flex; align-items:center; gap:7px; padding:0 8px}
+  .sline.w85{width:85%} .sline.w70{width:70%}
+  .sbot{height:32px; border-radius:10px; background:#eef2fa; display:flex; align-items:center; gap:7px; padding:0 8px}
   .sbot .av{width:16px;height:16px;border-radius:5px;background:#c9d6ff}
-  .sbot .nm{height:8px; width:64px; border-radius:4px; background:#d8e0ef}
-  .card{margin-top:auto; border-radius:11px; padding:8px 9px; display:flex; flex-direction:column; gap:5px}
-  .card.ghost{border:1.5px dashed #cfd7e6; background:transparent; align-items:center; justify-content:center; height:52px; font-size:11px; color:#9aa3b4}
-  .card.real{background:linear-gradient(180deg,#f2f6ff,#fff); border:1.5px solid #c9d6ff}
-  .card .crow{display:flex; align-items:baseline; justify-content:space-between}
-  .card .cl{font-size:10.5px; color:#7b8496}
-  .card .cv{font-size:13.5px; font-weight:800; color:var(--ink); letter-spacing:-.3px}
-  .card .cv.blue{color:var(--blue)}
-  .card .ctrack{height:4px; border-radius:2px; background:#e4e9f5; overflow:hidden}
-  .card .cfill{height:100%; width:34%; border-radius:2px; background:linear-gradient(90deg,#ffb37a,#ff8a3d)}
-  .card .cnote{font-size:9.8px; color:#9aa3b4}
-  .foot{display:flex; gap:6px; margin-top:6px}
-  .fbtn{width:26px;height:26px;border-radius:8px;background:#e9edf5; border:1px solid #dbe2ee}
-  .desc{flex:1 1 auto; font-size:12.4px; color:var(--ink2); line-height:1.6; padding-left:4px}
-  .desc b{color:var(--ink)}
-  .desc code{font-family:Consolas,monospace; font-size:11.6px; background:#f1f4fa; padding:1px 5px; border-radius:5px; color:#2a3550}
+  .sbot .nm{height:8px; width:60px; border-radius:4px; background:#d8e0ef}
+  .ghost{margin-top:auto; height:54px; border-radius:12px; border:1.5px dashed #cfd7e6; display:grid; place-items:center; font-size:11.5px; color:#9aa3b4}
+  .real{margin-top:auto; border-radius:12px; padding:8px 10px; background:linear-gradient(180deg,#f2f6ff,#fff); border:1.5px solid #c9d6ff; display:flex; flex-direction:column; gap:5px}
+  .real .row{display:flex; align-items:baseline; justify-content:space-between}
+  .real .l{font-size:10.5px; color:#7b8496}
+  .real .v{font-size:14px; font-weight:800; color:var(--ink)}
+  .real .v.blue{color:var(--blue)}
+  .track{height:4px;border-radius:2px;background:#e4e9f5;overflow:hidden}
+  .fill{height:100%;width:33%;border-radius:2px;background:linear-gradient(90deg,#ffb37a,#ff8a3d)}
+  .btns{display:flex; gap:7px; margin-top:2px}
+  .btn{width:26px;height:26px;border-radius:8px;background:#e9edf5;border:1px solid #dbe2ee}
+  .mnote{font-size:13.5px; color:var(--ink2); line-height:1.6}
+  .mnote b{color:var(--ink)}
 
-  .bottom{margin-top:16px; background:#11151f; color:#eef1f7; border-radius:16px; padding:18px 26px; display:flex; align-items:center; gap:16px}
-  .bottom .label{font-size:12.5px; letter-spacing:2px; color:#8e9bb6; flex:none}
-  .bottom .line{font-size:19px; font-weight:600; line-height:1.45}
-  .bottom .line em{font-style:normal; color:#8fb2ff}
-  .srcs{margin-top:12px; font-size:12px; color:#9aa3b4; line-height:1.7; text-align:right}
+  .bottom{margin-top:22px; background:#11151f; color:#eef1f7; border-radius:18px; padding:19px 28px; display:flex; align-items:center; gap:18px}
+  .bottom .k{font-size:13px; letter-spacing:3px; color:#8e9bb6; flex:none}
+  .bottom .q{font-size:22px; font-weight:700; line-height:1.35}
+  .bottom .q em{font-style:normal; color:#8fb2ff}
 </style>
 </head>
 <body>
   <header>
     <div>
-      <h1>一次真实落地：给左侧栏加一张<span>费用卡片</span></h1>
-      <div class="sub">同一个需求，六个环节，分给不同的角色和模型，中间没有一次「自己审自己」</div>
+      <h1>一次真实落地：<span>加一张费用卡</span></h1>
+      <div class="sub">六个环节，六个人分工</div>
     </div>
     <div class="meta">AI Agent 进展汇报 · 3 / 4<br/>2026-11-20</div>
   </header>
 
-  <div class="bar">
-    <div class="lab">一条真实需求的六个环节</div>
-    <div class="ln"></div>
-    <div class="who">第 2–5 步各自换了一个模型执行 · 实际耗时一天</div>
-  </div>
-
-  <div class="steps">
-    <div class="st" style="--c:var(--blue)">
-      <div class="no">01</div>
+  <div class="pipe">
+    <div class="step" style="--c:#2f6bff">
+      <div class="no">1</div>
+      <div class="ring"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M10 12h28v18H22l-8 7v-7h-4z" stroke-linejoin="round"/></svg></div>
       <div class="t">提需求</div>
-      <div class="d">左侧栏底部要和传统版一样，有<b>余额、今日消费、峰谷时段</b>。</div>
-      <div class="by"><i></i><b>我</b>　说出想要什么</div>
+      <div class="s">我要一张卡</div>
+      <div class="who">我</div>
     </div>
-    <div class="st" style="--c:var(--violet)">
-      <div class="no">02</div>
-      <div class="t">先查有没有现成的</div>
-      <div class="d">上游 1.9.70 与最新 1.9.77 都没有 Bot 模式适配；GitHub 上也<b>没人报过</b>。</div>
-      <div class="by"><i></i><b>研究</b>　查上游、查 issue</div>
+    <div class="step" style="--c:#7c5cff">
+      <div class="no">2</div>
+      <div class="ring"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="21" cy="21" r="11"/><path d="M29 29l9 9" stroke-linecap="round"/></svg></div>
+      <div class="t">查现成</div>
+      <div class="s">上游没做过</div>
+      <div class="who">研究</div>
     </div>
-    <div class="st" style="--c:var(--orange)">
-      <div class="no">03</div>
-      <div class="t">量清楚再动手</div>
-      <div class="d">注入探针读出：核心侧栏<b>宽度 0</b>，外壳面板 <code>z-index:25</code> 把浮层压在下面。</div>
-      <div class="by"><i></i><b>实现</b>　测真实几何</div>
+    <div class="step" style="--c:#ff8a3d">
+      <div class="no">3</div>
+      <div class="ring"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M10 34V18a4 4 0 014-4h20l-4-4M38 14v16a4 4 0 01-4 4H14l4 4"/></svg></div>
+      <div class="t">量清楚</div>
+      <div class="s">宽 0、被压住</div>
+      <div class="who">实现</div>
     </div>
-    <div class="st" style="--c:var(--orange)">
-      <div class="no">04</div>
-      <div class="t">写一个自己的小插件</div>
-      <div class="d">读本机账本，从 <code>127.0.0.1:47123</code> 出数，卡片插进侧栏面板里。</div>
-      <div class="by"><i></i><b>实现</b>　写代码、跑通</div>
+    <div class="step" style="--c:#ff8a3d">
+      <div class="no">4</div>
+      <div class="ring"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M26 8l14 14-16 16H10V24z" stroke-linejoin="round"/><path d="M20 14l14 14"/></svg></div>
+      <div class="t">写插件</div>
+      <div class="s">本地出数</div>
+      <div class="who">实现</div>
     </div>
-    <div class="st" style="--c:var(--green)">
-      <div class="no">05</div>
+    <div class="step" style="--c:#19a974">
+      <div class="no">5</div>
+      <div class="ring"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="24" cy="24" r="16"/><path d="M16 24l6 6 11-12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="t">换人验收</div>
-      <div class="d">刷新、截图、核对数字：余额和今日是否与账本一致。</div>
-      <div class="by"><i></i><b>评审</b>　不是写的人自己看</div>
+      <div class="s">数字对得上</div>
+      <div class="who">评审</div>
     </div>
-    <div class="st" style="--c:var(--blue)">
-      <div class="no">06</div>
+    <div class="step" style="--c:#2f6bff">
+      <div class="no">6</div>
+      <div class="ring"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M24 38V12M14 20l10-10 10 10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="t">回馈上游</div>
-      <div class="d">把实测几何与方案整理成 <b>issue #545</b>，提给插件作者。</div>
-      <div class="by"><i></i><b>Chief</b>　汇总、对外沟通</div>
+      <div class="s">issue #545</div>
+      <div class="who">Chief</div>
     </div>
   </div>
 
-  <div class="lower">
-    <div class="mock">
-      <div class="mh"><div class="mt">之前</div><div class="tag before">只有两个按钮</div><div class="mn">左侧栏底部</div></div>
-      <div class="panelrow">
-        <div class="sidebar">
-          <div class="sline w85"></div><div class="sline w70"></div><div class="sline w55"></div>
-          <div class="sbot"><div class="av"></div><div class="nm"></div></div>
-          <div class="card ghost">这里原本什么都没有</div>
-          <div class="foot"><div class="fbtn"></div><div class="fbtn"></div></div>
-        </div>
-        <div class="desc">成本数据其实一直在记，只是<b>显示不出来</b>：插件的卡片渲染进了一个宽度为 0 的容器，用户能看到的只有外壳的两个圆钮。<br/><br/>这一步最花时间的不是写代码，是<b>把「看不见」变成「量得出来」</b>。</div>
+  <div class="pair">
+    <div class="pcard">
+      <div class="ph">
+        <div class="big g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h6"/></svg></div>
+        <div class="pt">之前</div>
+        <div class="badge g">卡片在，看不见</div>
       </div>
-    </div>
-
-    <div class="mock">
-      <div class="mh"><div class="mt">之后</div><div class="tag after">卡片嵌在侧栏里</div><div class="mn">同一个窗口</div></div>
-      <div class="panelrow">
+      <div class="pline">侧栏只有两个圆钮</div>
+      <div class="mock">
         <div class="sidebar">
           <div class="sline w85"></div><div class="sline w70"></div>
           <div class="sbot"><div class="av"></div><div class="nm"></div></div>
-          <div class="card real">
-            <div class="crow"><span class="cl">余额</span><span class="cv">¥98.13</span></div>
-            <div class="crow"><span class="cl">今日</span><span class="cv blue">¥2.1024</span></div>
-            <div class="crow"><span class="cl">平价</span><span class="cl">11小时15分后进入高峰</span></div>
-            <div class="ctrack"><div class="cfill"></div></div>
-          </div>
-          <div class="foot"><div class="fbtn"></div><div class="fbtn"></div></div>
+          <div class="ghost">看不见</div>
+          <div class="btns"><div class="btn"></div><div class="btn"></div></div>
         </div>
-        <div class="desc">不飘在窗口上，不长在别人的地盘里：<b>插进侧栏的面板流</b>，跟着列表和按钮一起排版。<br/><br/>数据每 20 秒刷新一次，切回传统界面自动隐藏 —— 两个界面共用同一本账。</div>
+        <div class="mnote">数据一直在记，<br/>只是没地方显示。</div>
+      </div>
+    </div>
+
+    <div class="pcard now">
+      <div class="ph">
+        <div class="big b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 9h8M8 13h5"/><path d="M7 17h4"/></svg></div>
+        <div class="pt">之后</div>
+        <div class="badge b">嵌进侧栏</div>
+      </div>
+      <div class="pline">跟着列表一起排版</div>
+      <div class="mock">
+        <div class="sidebar">
+          <div class="sline w85"></div><div class="sline w70"></div>
+          <div class="sbot"><div class="av"></div><div class="nm"></div></div>
+          <div class="real">
+            <div class="row"><span class="l">余额</span><span class="v">¥98.13</span></div>
+            <div class="row"><span class="l">今日</span><span class="v blue">¥2.1024</span></div>
+            <div class="row"><span class="l">平价</span><span class="l">11小时后高峰</span></div>
+            <div class="track"><div class="fill"></div></div>
+          </div>
+          <div class="btns"><div class="btn"></div><div class="btn"></div></div>
+        </div>
+        <div class="mnote">不飘在窗口上，<br/>回到传统界面自动隐藏。</div>
       </div>
     </div>
   </div>
 
   <div class="bottom">
-    <div class="label">结论</div>
-    <div class="line">这件事一个人也能做，但<b>做不到「换人验收」</b>；Bot 团队的价值不在快，在<em>每一段都有人负责</em>。</div>
+    <div class="k">一句话</div>
+    <div class="q">一个人也能做完，但做不到<em>换人验收</em>。</div>
   </div>
-
-  <div class="srcs">注：图为示意，实际界面见实拍截图；issue 见 github.com/Han-1413141/dsh-cost-meter/issues/545</div>
 </body>
 </html>
