@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<style>
+  :root{
+    --ink:#101319; --ink2:#4b5263; --ink3:#838b9c;
+    --line:#e2e6ef; --card:#fff;
+    --blue:#2f6bff; --violet:#7c5cff; --orange:#ff8a3d; --green:#19a974; --red:#e5484d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    width:1600px; padding:44px 56px 32px;
+    background:
+      radial-gradient(1100px 420px at 10% -8%, #e8eeff 0%, rgba(232,238,255,0) 70%),
+      radial-gradient(900px 380px at 96% 4%, #fdeee6 0%, rgba(253,238,230,0) 70%),
+      #f5f7fb;
+    color:var(--ink); font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+  }
+  header{display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:20px; border-bottom:2px solid var(--line)}
+  h1{font-size:38px; line-height:1.15; letter-spacing:.5px}
+  h1 span{color:var(--blue)}
+  .sub{font-size:16px; color:var(--ink2); margin-top:9px}
+  .meta{font-size:13.5px; color:var(--ink3); text-align:right; line-height:1.7}
+
+  /* 底座示意 */
+  .stack{display:flex; align-items:center; gap:12px; margin-top:16px; background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:14px 20px}
+  .layer{display:flex; align-items:center; gap:10px; flex:none}
+  .layer .bx{border-radius:12px; padding:9px 14px; font-size:13.5px; font-weight:700; line-height:1.25; white-space:nowrap}
+  .bx.base{background:#eef0f5; color:#4a5263}
+  .bx.shell{background:#e7eeff; color:#1b3ea8}
+  .bx.team{background:#e6f7f0; color:#0d7a52}
+  .layer .tiny{font-size:11.5px; color:var(--ink3); line-height:1.4}
+  .stack .arw{width:26px; color:#c3cad8; flex:none}
+  .stack .arw svg{width:26px;height:16px}
+  .stack .note{margin-left:auto; font-size:12.5px; color:var(--ink3); line-height:1.5; text-align:right; max-width:330px}
+  .stack .note b{color:#0d7a52}
+
+  .reasons{display:flex; align-items:center; gap:8px; margin-top:13px}
+  .reasons .rl{font-size:12.5px; color:var(--ink3); font-weight:700; margin-right:2px}
+  .chip{font-size:12.5px; padding:5px 11px; border-radius:999px; background:#f6f8fd; border:1px solid var(--line); color:#4b5263; line-height:1.3}
+  .chip b{color:var(--blue); font-weight:700}
+
+  /* 对照表 */
+  .cmp{margin-top:12px; border:1.5px solid var(--line); border-radius:18px; overflow:hidden; background:var(--card)}
+  .row{display:grid; grid-template-columns:132px 1fr 1fr}
+  .row+.row{border-top:1px solid #eef1f7}
+  .row.head{background:#fafbfe; border-bottom:1.5px solid var(--line)}
+  .row.head .c{font-size:13px; font-weight:700; letter-spacing:.5px; padding:11px 18px}
+  .row .c{padding:11px 18px; font-size:13.8px; line-height:1.5}
+  .row .dim{color:var(--ink3); font-weight:700; font-size:13px; background:#fcfdff}
+  .row .old{color:#5f6776}
+  .row .new{color:var(--ink); font-weight:600; background:#fbfcff}
+  .row.head .old{color:#6b7382}
+  .row.head .new{color:#1b3ea8; background:#f4f7ff}
+  .row .new b{color:var(--blue)}
+  .dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:7px; background:#c3cad8; vertical-align:1px}
+  .row .new .dot{background:var(--blue)}
+
+  /* 业界映射 */
+  .map{margin-top:12px; background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:14px 20px 12px}
+  .mtitle{display:flex; align-items:baseline; gap:10px}
+  .mtitle .t{font-size:15.5px; font-weight:700}
+  .mtitle .n{font-size:12.5px; color:var(--ink3); margin-left:auto}
+  .items{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:11px}
+  .it{border:1px solid var(--line); border-radius:14px; padding:11px 13px; background:#fcfdff}
+  .it .k{font-size:13px; font-weight:800; color:var(--ink); line-height:1.35}
+  .it .k em{font-style:normal; font-size:11px; color:#9aa3b4; font-weight:600; display:block; margin-bottom:3px; letter-spacing:.4px}
+  .it .v{font-size:12.8px; color:var(--ink2); line-height:1.5; margin-top:6px; padding-top:6px; border-top:1px dashed var(--line)}
+  .it .v b{color:var(--ink)}
+  .it .s{font-size:11px; color:#a9b1c1; margin-top:6px}
+
+  .bottom{margin-top:10px; background:#11151f; color:#eef1f7; border-radius:16px; padding:18px 26px; display:flex; align-items:center; gap:16px}
+  .bottom .label{font-size:12.5px; letter-spacing:2px; color:#8e9bb6; flex:none}
+  .bottom .line{font-size:19px; font-weight:600; line-height:1.45}
+  .bottom .line em{font-style:normal; color:#8fb2ff}
+  .srcs{margin-top:9px; font-size:12px; color:#9aa3b4; line-height:1.7; text-align:right}
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Bot 是 DSH 上的<span>升级</span>，不是另起一套</h1>
+      <div class="sub">同一套底座上加了一层「团队外壳」：角色、模型、记忆、评审都变了，宿主没变</div>
+    </div>
+    <div class="meta">AI Agent 进展汇报 · 2 / 3<br/>2026-11-20</div>
+  </header>
+
+  <div class="stack">
+    <div class="layer">
+      <div class="bx base">DSH 宿主<br/><span style="font-weight:600;font-size:11.5px;color:#6b7382">运行时 · 会话 · 存储 · 插件</span></div>
+      <div class="arw"><svg viewBox="0 0 100 26" fill="none"><path d="M2 13h86" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M82 6l12 7-12 7" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="bx shell">ds-bot 团队外壳<br/><span style="font-weight:600;font-size:11.5px;color:#425fa8">Bot 面板 · 群聊 · 调度</span></div>
+      <div class="arw"><svg viewBox="0 0 100 26" fill="none"><path d="M2 13h86" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M82 6l12 7-12 7" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="bx team">Chief + 专科 Bot<br/><span style="font-weight:600;font-size:11.5px;color:#0d7a52">一人一岗 · 各自模型</span></div>
+    </div>
+    <div class="note">同一个 profile、同一份会话存储、同一本费用账本 —— <b>外壳换一层，底座复用</b>。</div>
+  </div>
+
+  <div class="reasons">
+    <div class="rl">我要用 Bot 的理由</div>
+    <div class="chip">分工<b>清楚</b>：谁在干什么看得见</div>
+    <div class="chip">模型<b>不同源</b>：干活和验收不是同一个脑子</div>
+    <div class="chip">记忆<b>不丢</b>：不用每次从头交代</div>
+    <div class="chip">责任<b>可追溯</b>：谁做的、谁审的都有记录</div>
+  </div>
+
+  <div class="cmp">
+    <div class="row head"><div class="c dim">比什么</div><div class="c old">以前：DSH Agent Team</div><div class="c new">现在：DS Bot 团队</div></div>
+    <div class="row">
+      <div class="c dim">角色</div>
+      <div class="c old">临时派生的子 Agent，分工靠提示词，跑完就散</div>
+      <div class="c new"><span class="dot"></span>常驻 Bot，一人一岗，侧栏里看得见谁在干什么</div>
+    </div>
+    <div class="row">
+      <div class="c dim">模型</div>
+      <div class="c old">全部继承主模型：儿子和爹同一个脑子</div>
+      <div class="c new"><span class="dot"></span>每个 Bot 自己选模型，可以同源，也可以<b>异源</b></div>
+    </div>
+    <div class="row">
+      <div class="c dim">记忆</div>
+      <div class="c old">共享同一段上下文，任务结束就丢</div>
+      <div class="c new"><span class="dot"></span>每个 Bot 一份长期记忆，加一个自己的工作目录</div>
+    </div>
+    <div class="row">
+      <div class="c dim">评审</div>
+      <div class="c old">同一个模型自己审自己 —— 球员兼裁判</div>
+      <div class="c new"><span class="dot"></span>换一个模型来审，才叫<b>独立验证</b></div>
+    </div>
+    <div class="row">
+      <div class="c dim">协作</div>
+      <div class="c old">一条链串行，我在中间传话</div>
+      <div class="c new"><span class="dot"></span>主 Bot 拆任务派活，群里并行推进</div>
+    </div>
+  </div>
+
+  <div class="map">
+    <div class="mtitle"><div class="t">业界怎么做 → 我们怎么落地</div><div class="n">不是自己发明的玩法</div></div>
+    <div class="items">
+      <div class="it">
+        <div class="k"><em>业界</em>任务型 Agent</div>
+        <div class="v"><b>我们：</b>研究、实现、评审各有专责 Bot，不跨界</div>
+        <div class="s">Gartner：2026 年 40% 企业应用内置任务型 Agent</div>
+      </div>
+      <div class="it">
+        <div class="k"><em>业界</em>多 Agent 协作框架</div>
+        <div class="v"><b>我们：</b>Chief 拆活派单，群聊里多角色并行</div>
+        <div class="s">TBRC：多 Agent 协作是 2026 年的主要趋势之一</div>
+      </div>
+      <div class="it">
+        <div class="k"><em>业界</em>Agent = 模型 + 工具 + 记忆</div>
+        <div class="v"><b>我们：</b>每个 Bot 带自己的记忆和文件夹，不用重新交代</div>
+        <div class="s">行业通用定义，各厂商文档口径一致</div>
+      </div>
+      <div class="it">
+        <div class="k"><em>业界</em>可信与可验证</div>
+        <div class="v"><b>我们：</b>做的人和审的人不是同一个模型，结论才敢签字</div>
+        <div class="s">McKinsey：62% 在试 Agent，多数卡在没法规模化</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="label">结论</div>
+    <div class="line">我们不是发明了新玩法，是把业界已经在做的事，<em>落到自己每天的工作里</em>。</div>
+  </div>
+
+  <div class="srcs">来源：Gartner（2025-08）；The Business Research Company《AI Agents Market Report 2026》；McKinsey《The State of AI in 2025》；本机实测：ds-bot 0.3.8 与 DSH 0.2.2-rc.3 共用同一 profile 与 storages。</div>
+</body>
+</html>
